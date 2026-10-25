@@ -1459,14 +1459,14 @@ code ERESOLVE` naming a peer range that excludes the new major, not a
 
 ### 3.12 Analytics verification (Umami)
 
-Umami Cloud tracks page views with zero cookies and no consent banner.
-The script loads from `cloud.umami.is` via the base layout. Run this
-manual check after changes to navigation, View Transitions, or the
-analytics integration.
+Self-hosted Umami (Imbra lab) tracks page views with zero cookies and
+no consent banner. The script loads from `stats.imbra.io` via the base
+layout. Run this manual check after changes to navigation, View
+Transitions, or the analytics integration.
 
 **Prerequisites:**
 
-- Access to https://cloud.umami.is/ (login credentials)
+- Access to the self-hosted Umami dashboard (LAN only; admin login)
 - Chrome DevTools (or equivalent)
 
 **Step 1 — Script loads:**
@@ -1475,7 +1475,7 @@ analytics integration.
 2. DevTools → Network → filter `script.js`
 3. Refresh the page
 
-Expected: `cloud.umami.is/script.js` returns **200 OK**, ~5-6 KB.
+Expected: `stats.imbra.io/script.js` returns **200 OK**, ~5-6 KB.
 No console errors.
 
 **Step 2 — Page views register:**
@@ -1492,7 +1492,7 @@ Expected: each page path appears (`/lenses/`, `/cameras/`, `/genre/`,
 
 1. DevTools → Network → clear the log
 2. Click one navigation link (e.g. Cameras)
-3. Filter by `cloud.umami.is`
+3. Filter by `stats.imbra.io`
 
 Expected: exactly **1 `send`** request per navigation. If 2+ fire
 for a single click, that's a duplicate event bug.
@@ -1501,7 +1501,7 @@ for a single click, that's a duplicate event bug.
 
 1. Clear the Network log
 2. Type `wuseria.com` in the address bar and press Enter (full load)
-3. Filter by `cloud.umami.is`
+3. Filter by `stats.imbra.io`
 
 Expected: `script.js` + exactly **1 `send`** request.
 
